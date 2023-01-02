@@ -1,0 +1,62 @@
+//api hit hogi then what is req and res
+import User from "../models/User.js"
+import bcrypt from 'bcryptjs';
+import {createError} from "../utils/error.js"
+import jwt from "jsonwebtoken"
+
+
+export const register = async (req, res, next) => {
+
+    try {
+
+        var salt = bcrypt.genSaltSync(10);
+        var hash = bcrypt.hashSync(req.body.password, salt);
+        const newUser = new User({
+            username: req.body.username,
+            email: req.body.email,
+            password: hash,
+        })
+        // i sended to the modeel User (collection with schema) and that model is responsible to create a collection and send the promise back
+        await newUser.save() //saved to the database
+        console.log("user registered sucessfully!!");
+        res.status(200).json(newUser) //sending response to the user
+        
+
+    } catch (error) {
+        console.log("got an eror");
+        next(error)
+
+    }
+}
+
+//login  function
+export const login = async (req, res, next) => {
+
+    // User is a collecton in the model
+    try {
+        const user = await  User.findOne({username : req.body.username })
+        //here we are not getting any error so  that we can pass to the next() function ==> we have to create an error
+        if(!user) return next(createError(404 , "User Not found"))
+
+        const isPasswordCorrect = await bcrypt.compare(req.body.password, user.password, )
+        if(!isPasswordCorrect) return next(createError(400 , "Wrong credentials pls login with proper credentials"))
+
+        const token =  jwt.sign({id : user._id , isAdmin :  user.isAdmin} ,process.env.JWT)
+
+        const {password , isAdmin , ...otherDetails} = user._doc //we are getting a data of a user trying to login and ._doc is a object which complete user details and we are destructruring it
+
+
+            console.log("user login sucessfully :)");
+            res.cookie("acess_token" , token , {httpOnly :  true ,}//this does not allow any client to enter
+            ).status(200).json({...otherDetails})
+            console.log("token : " , token);
+
+        
+
+
+    } catch (error) {
+        console.log("got an eror");
+        next(error)
+
+    }
+}

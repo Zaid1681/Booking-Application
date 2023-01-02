@@ -1,0 +1,25 @@
+.emailList{
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    background-color: #003580;
+    color: white;
+    margin-top: 20px;
+}
+.emailContainer{
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    padding: 80px;
+}
+.emailInputContainer{
+    display: flex;
+    gap: 20px;
+    /* align-items: center; */
+    justify-content: center;
+    
+}
+.emailInput{
+    width: 140%;
+
+}
