@@ -1,14 +1,14 @@
 .date {
-    position: absolute;
-    top: 50px;
-    z-index: 2;
-    /* background-color: green; */
-    width: 100%;
-  }
-  /* .headerSearchItem{
+  position: absolute;
+  top: 50px;
+  z-index: 2;
+  /* background-color: green; */
+  width: 100%;
+}
+/* .headerSearchItem{
     width: 100%;
   } */
-  .rdrMonth {
-    z-index: 2;
-    width: 19em;
+.rdrMonth {
+  z-index: 2;
+  width: 19em;
 }

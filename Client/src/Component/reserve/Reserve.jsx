@@ -1,24 +1,3 @@
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-// import React from 'react'
-// import { faCircleXmark } from '@fortawesome/free-solid-svg-icons'
-
-// function Reserve({setOpen , hotelId}) {
-//   return (
-//     <div className='reserve'>
-//         <div className="rContainer">
-//             <FontAwesomeIcon icon={faCircleXmark} className="rClose" style={{cursor:"pointer"}} onClick={()=>setOpen(false)} />
-//             <span>Select Yotu Rooms:</span>
-//         </div>
-
-//         Reserve
-
-//     </div>
-//   )
-// }
-
-// export default Reserve
-
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
 
@@ -33,11 +12,7 @@ import { useNavigate } from "react-router-dom";
 const Reserve = ({ setOpen, hotelId }) => {
   const [selectRooms, setSelectRooms] = useState([])
   const { data, loading, error } = useFetch(`/hotelrooms/${hotelId}`);
-  // console.log(data);
   const { dates } = useContext(SearchContext)
-  // console.log("dates: " ,dates[0]);
-  // const maindate = dates[0]
-
 
 
   const getDatesInRange = (startDate, endDate) => {
@@ -57,7 +32,6 @@ const Reserve = ({ setOpen, hotelId }) => {
   }
 
 
-  // preventing user to booked same room
   const alldates = getDatesInRange(dates?.[0].startDate, dates?.[0].endDate);
 
   const isAvailable = (roomNumber) => {
@@ -119,7 +93,6 @@ const Reserve = ({ setOpen, hotelId }) => {
               <div className="rMax">Max People:  <b> {item.maxPeople} </b></div>
               <div className="rPrice">{item.price}</div>
             </div>
-            {/* <div className="eSelectRooms"> */}
 
               {item.roomNumber.map((itemRoom) => (
                 <div className="room">
@@ -129,7 +102,6 @@ const Reserve = ({ setOpen, hotelId }) => {
                   />
                 </div>
               ))}
-            {/* </div> */}
           </div>
         ))
         }
