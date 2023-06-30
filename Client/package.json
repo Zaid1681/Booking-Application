@@ -2,10 +2,7 @@
     "name": "booking",
     "version": "0.1.0",
     "private": true,
-    "proxy" : "http://localhost:8000/api/auth",
-    "proxy" : "http://localhost:8000/api/hotels",
-
-
+    "proxy": "http://localhost:8000/api/hotels",
     "dependencies": {
         "@fortawesome/fontawesome-svg-core": "^6.2.1",
         "@fortawesome/free-regular-svg-icons": "^6.2.1",
@@ -47,7 +44,8 @@
             "last 1 firefox version",
             "last 1 safari version"
         ]
-    } 
-
-    
+    },
+    "devDependencies": {
+        "tailwindcss": "^3.3.2"
+    }
 }

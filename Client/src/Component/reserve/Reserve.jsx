@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 
 const Reserve = ({ setOpen, hotelId }) => {
   const [selectRooms, setSelectRooms] = useState([])
-  const { data, loading, error } = useFetch(`/hotelrooms/${hotelId}`);
+  const { data, loading, error } = useFetch(`/api/hotels/hotelrooms/${hotelId}`);
   const { dates } = useContext(SearchContext)
 
 
