@@ -14,7 +14,7 @@ function Featured() {
         {loading ? (
           console.log("loading data pls wait")
         ) : (
-          <div className="flex md:mx-20 flex-col md:my-10 -z-10 lg:my-2 mb-10 mt-[20rem]  sm:mt-[9rem] ">
+          <div className="flex md:mx-20 flex-col  -z-10 lg:my-2 mb-10 mt-10 md:mt-[11rem]  sm:mt-[4rem] ">
             <h1 className="mx-10 text-2xl font-bold py-4  font-titleFont">
               Book Hotels In :
             </h1>
