@@ -14,20 +14,24 @@ import Reserve from "../../Component/reserve/Reserve.jsx";
 import { AuthContext } from "../../Context/AuthContext";
 
 const Hotel = () => {
-  const [slideNumber, setSlideNumber] = useState(0);
   const location = useLocation();
-  // console.log("location : ",location);
+  const [slideNumber, setSlideNumber] = useState(0);
   const id = location.pathname.split("/")[2];
+  // console.log("location : ",location);
+  // console.log(id);
 
-  const { data, loading, error } = UseFetch(`/api/hotels/find/${id}`);
-  // console.log(data);
+  const { data, loading, error } = UseFetch(`api/hotels/find/${id}`);
+  // console.log(error);
+  console.log(data.hotel);
 
-  const { dates, options } = useContext(SearchContext);
-  console.log("options: ", options.room);
-  const { user } = useContext(AuthContext);
-  const [open, setOpen] = useState(false);
   const [openModal, setOpenModal] = useState(false);
+  const [open, setOpen] = useState(false);
   const navigate = useNavigate();
+  const { dates, options } = useContext(SearchContext);
+  const { user } = useContext(AuthContext);
+  console.log("options: ", options.room);
+  // console.log("dates --> ", dates);
+  // console.log("user ==>", user);
 
   const MILLISECONDS_PER_DAY = 1000 * 60 * 60 * 24;
   function dayDifference(date1, date2) {
@@ -36,7 +40,9 @@ const Hotel = () => {
     return diffDays;
   }
 
-  const days = dayDifference(dates[0].endDate, dates[0].startDate);
+  const days = dayDifference(dates[0]?.endDate || 0, dates[0]?.startDate || 0);
+  // console.log(days);
+  // const days = 10;
 
   const handleClick = () => {
     // console.log("hello Hotel click");
@@ -68,7 +74,7 @@ const Hotel = () => {
       src: "https://cf.bstatic.com/xdata/images/hotel/max1280x900/261707389.jpg?k=52156673f9eb6d5d99d3eed9386491a0465ce6f3b995f005ac71abc192dd5827&o=&hp=1",
     },
   ];
-
+  // console.log("-->", data.hote.photos);
   return (
     <div>
       <Navbar />
@@ -76,7 +82,9 @@ const Hotel = () => {
       <div className="hotelContainer">
         <div className="hotelWrapper">
           {/* <button className="bookNow">Reserve or Book Now!</button> */}
-          <h1 className="hotelTitle">{data?.hotel?.name}</h1>
+          <h1 className="hotelTitle text-3xl font-titlefont font-semibold">
+            {(data?.hotel?.name || "").toUpperCase()}
+          </h1>
           <div className="hotelAddress">
             <FontAwesomeIcon icon={faLocationDot} />
             <span>Elton St {data?.hotel?.distance} New york</span>
@@ -91,6 +99,7 @@ const Hotel = () => {
           <div className="hotelImages">
             {/* here images are note availbale */}
             {/* {data?.hotel?.photos?.map((photo) => ( */}
+            {/* {data?.hotel?.photos?.map((photo) => ( */}
             {photos?.map((photo) => (
               <div className="hotelImgWrapper" key={data._id}>
                 <img src={photo.src} className="hotelImg" />
@@ -103,7 +112,7 @@ const Hotel = () => {
               <p className="hotelDesc">{data?.hotel?.desc}</p>
             </div>
             <div className="hotelDetailsPrice">
-              <h1>Perfect for a 9-night stay!</h1>
+              <h1>Perfect for a {days}-night stay!</h1>
               <span>
                 Located in the real heart of Krakow, this property has an
                 excellent location score of 9.8!
@@ -119,7 +128,7 @@ const Hotel = () => {
       </div>
       <MailList />
       <Footer />
-      {openModal && <Reserve setOpen={setOpenModal} hotelId={id} />}
+      {openModal && <Reserve setOpen={setOpenModal} hotelId={id} data={data} />}
     </div>
   );
 };

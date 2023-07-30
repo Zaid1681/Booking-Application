@@ -4,7 +4,7 @@ import useFetch from "../../Hooks/UseFetch.jsx";
 
 function FeatureProperty() {
   const { data, loading, error } = useFetch(
-    "/api/hotels/find/?featured=true&limit=4"
+    "api/hotels/find/?featured=true&limit=4"
   );
   let arr = data.hotels;
 

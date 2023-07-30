@@ -45,8 +45,9 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 const useFetch = (url) => {
-  let mainurl = "https://bookingappbackend.onrender.com" + url;
-
+  // let mainurl = "https://bookingappbackend.onrender.com" + url;
+  let mainurl = "http://localhost:8000/" + url;
+  // console.log(mainurl);
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);

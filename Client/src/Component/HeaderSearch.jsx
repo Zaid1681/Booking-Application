@@ -54,7 +54,7 @@ const HeaderSearch = () => {
 
   const handleSearch = () => {
     dispatch({ type: "NEW_SEARCH", payload: { destination, dates, options } });
-    navigate("/hotels", { state: { destination, dates, options } });
+    navigate("/hotels", { state: { destination, dates, options } }); // passing route along with sate data here
   };
 
   return (

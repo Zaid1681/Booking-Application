@@ -2,9 +2,10 @@ import "./ListResult.css";
 import React from "react";
 import { Link } from "react-router-dom";
 
-const ListResult = ({ item }) => {
+const ListResult = (item) => {
+  console.log("item", item.item);
   return (
-    <div className="searchItem flex lg:flex-row flex-col">
+    <div className="searchItem flex lg:flex-row flex-col bg-white">
       {" "}
       <img
         // src={item.photos[0]}
@@ -15,13 +16,13 @@ const ListResult = ({ item }) => {
       <div className="flex flex-2 md:flex-row flex-col">
         {" "}
         <div className="siDesc">
-          <h1 className="siTitle">{item.name}</h1>
+          <h1 className="siTitle">{item.item.name}</h1>
           <span className="siDistance">hello wordl from center</span>
           <span className="siTaxiOp">Free airport taxi</span>
           <span className="siSubtitle">
             Studio Apartment with Air conditioning
           </span>
-          <span className="siFeatures">{item.desc}</span>
+          <span className="siFeatures">{item.item.desc}</span>
           <span className="siCancelOp">Free cancellation </span>
           <span className="siCancelOpSubtitle">
             You can cancel later, so lock in this great price today!
@@ -31,13 +32,13 @@ const ListResult = ({ item }) => {
           {item.rating && (
             <div className="siRating">
               <span>Excellent</span>
-              <button>{item.rating}</button>
+              <button>{item.item.rating}</button>
             </div>
           )}
           <div className="siDetailTexts ">
-            <span className="siPrice">${item.cheapestPrices}</span>
+            <span className="siPrice">${item.item.cheapestPrices}</span>
             <span className="siTaxOp">Includes taxes and fees</span>
-            <Link to={`/hotels/${item._id}`}>
+            <Link to={`/hotels/${item.item._id}`}>
               <button className="siCheckButton">See availability</button>
             </Link>
           </div>

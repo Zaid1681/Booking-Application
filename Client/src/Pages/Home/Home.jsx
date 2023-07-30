@@ -17,8 +17,8 @@ function Home() {
   return (
     <div style={{ overflowX: "hidden" }}>
       <Navbar />
-      <Header />
-      <Featured />
+      {/* <div className="bg-[#f5f5f5]"> */}
+      <Header /> <Featured />
       <div className=" px-14 py-10  font-bold   mt-[5rem] font-titlefont text-3xl ">
         Browse hotel here{" "}
       </div>
@@ -26,9 +26,9 @@ function Home() {
       <div className=" px-14 py-10  font-bold   mt-[5rem] font-titlefont text-3xl ">
         Home Guests Love
       </div>
-
       <FeatureProperty />
       <MailList />
+      {/* </div> */}
       <Footer />
     </div>
   );
