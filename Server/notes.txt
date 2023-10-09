@@ -1,0 +1,10 @@
+1. JSON=>{
+
+    jwt is basically used to hide the user information as a json web token
+
+    we basically save it into the cookie 
+
+    this uses to varify the admin adnd user
+
+
+  }
