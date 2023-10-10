@@ -1,113 +1,55 @@
-import React, { useContext, useEffect } from "react";
+import React, { useState } from 'react';
+import { BookOpenIcon, Bars3BottomRightIcon, XMarkIcon } from '@heroicons/react/24/solid';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faBed,
   faPlane,
-  faTaxi,
   faCar,
   faCalendarDays,
   faPerson,
 } from "@fortawesome/free-solid-svg-icons";
-import { Link } from "react-router-dom";
-import { AuthContext } from "../Context/AuthContext";
+import './Navbar.css'; // Import your CSS file
+import { Link } from 'react-router-dom';
 
-function Navbar() {
-  const { user } = useContext(AuthContext);
-
-  const handleLogout = () => {
-    localStorage.removeItem("user");
-    window.location.reload(false);
-    console.log("logout");
-  };
+const Navbar = () => {
+  let Links = [
+    { name: "Stays", icon: <FontAwesomeIcon icon={faBed} className='w-5 h-5 text-gray-500' />, link: "/" },
+    { name: "Flight", icon: <FontAwesomeIcon icon={faPlane} className='w-5 h-5 text-gray-500' />, link: "/" },
+    { name: "Car rentals", icon: <FontAwesomeIcon icon={faCar} className='w-5 h-5 text-gray-500' />, link: "/" },
+    { name: "Attraction", icon: <FontAwesomeIcon icon={faBed} className='w-5 h-5 text-gray-500' />, link: "/" },
+  ];
+  let [open, setOpen] = useState(false);
 
   return (
-    <div className="w-full">
-      <div className="navContainer">
-        {/* <Link to="/"></Link> */}
-
-        <div className="  w-full flex-col lg:flex-row hidden lg:flex  ">
-          <div className="w-full flex lg:flex-row flex-col  font-bodyfont2 text-md font-semibold  gap-10 text-center items-center px-14 ">
-            <div
-              className=" hover:opacity-90 cursor-pointer font-bodyfont2 gap-2  flex items-center"
-              active
-            >
-              <FontAwesomeIcon icon={faBed} />
-              <span>Stays</span>
-            </div>
-            <div
-              className=" hover:opacity-90  cursor-pointer font-bodyfont2 gap-2  flex items-center"
-              active
-            >
-              <FontAwesomeIcon icon={faPlane} />
-              <span>Flights</span>
-            </div>
-            <div
-              className=" hover:opacity-90  cursor-pointer font-bodyfont2 gap-2  flex items-center"
-              active
-            >
-              <FontAwesomeIcon icon={faCar} />
-              <span>Car rentals</span>
-            </div>
-            <div
-              className="  hover:opacity-90 cursor-pointer font-bodyfont2 gap-2  flex items-center"
-              active
-            >
-              <FontAwesomeIcon icon={faBed} />
-              <span>Attraction</span>
-            </div>
-            <div
-              className=" hover:opacity-90  cursor-pointer font-bodyfont2 gap-2  flex items-center"
-              active
-            >
-              <FontAwesomeIcon icon={faTaxi} />
-              <span>Car Rentals</span>
-            </div>
-          </div>
-          {/* login , logout buttons */}
-          <div className="flex items-center justify-center">
-            {user ? (
-              <div className="navItems">
-                <div className="flex gap-5 mr-10 p-2.5 ">
-                  <div className="  font-bodyfont gap-3 text-center items-center text-lg flex">
-                    <p className="font-bodyfont2 text-lg">Welcome</p>
-                    {user.username}
-                  </div>{" "}
-                  <Link to="/">
-                    <button
-                      style={{ margin: "10px" }}
-                      className="btn btn-primary navbutton"
-                      onClick={handleLogout}
-                    >
-                      logout
-                    </button>
-                  </Link>
-                </div>
-              </div>
-            ) : (
-              <div className="flex p-2.5">
-                <Link to="/login">
-                  <button
-                    type="button"
-                    className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg  px-4 py-2 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 font-bodyfont2 text-md"
-                  >
-                    Login
-                  </button>
-                </Link>
-                <Link to="/register">
-                  <button
-                    type="button"
-                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg  px-4 py-2 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 font-bodyfont2 text-md"
-                  >
-                    Register
-                  </button>
-                </Link>
-              </div>
-            )}
-          </div>
+    <div className='header-container shadow-md w-full fixed top-0 left-0'>
+      <div className='md:flex items-center justify-between bg-white py-4 md:px-10 px-7'>
+        {/* logo section */}
+        <div className='font-bold text-2xl cursor-pointer flex items-center gap-1'>
+          <BookOpenIcon className='w-7 h-7 text-blue-600' />
+          <span>Book your hotel</span>
         </div>
+        {/* Menu icon */}
+        <div onClick={() => setOpen(!open)} className='menu-icon absolute right-8 top-6 cursor-pointer md:hidden w-7 h-7'>
+          {
+            open ? <XMarkIcon /> : <Bars3BottomRightIcon />
+          }
+        </div>
+        {/* link items */}
+        <ul className={`md:flex md:items-center md:pb-0 pb-12 absolute md:static bg-white md:z-auto z-[-1] left-0 w-full md:w-auto md:pl-0 pl-9 transition-all duration-500 ease-in ${open ? 'top-12' : 'top-[-490px]'}`}>
+          {Links.map((link, index) => (
+            <li key={index} className='md:ml-8 md:my-0 my-7 font-semibold flex items-center hover:bg-gray-100 transition duration-300'>
+              {link.icon}
+              <a href={link.link} className='text-gray-800 hover:text-blue-400 duration-500 ml-2'>{link.name}</a>
+            </li>
+          ))}
+          <Link to="/login">
+          <button  className='btn bg-blue-600 text-white md:ml-8 font-semibold px-3 py-1 rounded duration-500 md:static hover:bg-blue-700 transition duration-300'>Login</button>
+          </Link>
+        </ul>
+        {/* button */}
       </div>
     </div>
   );
-}
+};
 
 export default Navbar;

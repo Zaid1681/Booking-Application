@@ -1,37 +1,52 @@
-.navbar {
-  display: flex;
-  background-color: #003580;
-  color: white;
-  justify-content: center;
+/* Header Container */
+.header-container {
+  background-color: #ffffff; /* Background color for the header */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Shadow for the header */
+  z-index: 999; /* Ensure the header is on top of other content */
+}
 
-  height: 50px;
+/* Logo */
+.font-bold {
+  font-weight: bold;
 }
-.navContainer {
-  display: flex;
-  width: 100%;
-  max-width: 1024px;
-  /* background-color: red; */
-  align-items: center;
-  justify-content: space-between;
-}
-.logo {
-  font-size: 20px;
-  font-weight: 600;
+
+/* Menu Icon */
+.menu-icon {
   cursor: pointer;
 }
-.logo:hover {
-  color: #227af5;
-  transition: ease-in;
+
+/* Navigation Links */
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
 }
-.navItems {
-  /* text-align: center; */
+
+li {
+  margin-left: 1rem;
 }
-.navbutton {
-  /* font-size: 5px; */
-  font-size: 15px;
-  font-weight: 600;
-  margin-right: 15px;
-  line-height: 18px;
-  color: #003580;
-  background-color: white;
+
+/* Link Styling */
+a {
+  text-decoration: none;
+  color: #333333; /* Default link color */
+  transition: color 0.3s ease-in-out;
+}
+
+a:hover {
+  color: #007bff; /* Link color on hover */
+}
+
+/* Login Button */
+.btn {
+  background-color: #007bff; /* Button background color */
+  color: #ffffff; /* Button text color */
+  border: none;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.btn:hover {
+  background-color: #0056b3; /* Button background color on hover */
 }
